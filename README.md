@@ -13,10 +13,10 @@ poetry shell
 
 # Documentation \[PL\]
 
+Usage:
+
+```sh
+sh docs/generate_pdfs.sh
+```
+
 [Preliminary documentation](docs/dokumentacja_wstepna/dokumentacja_wstepna.md)
-
-
-
-
-
-
