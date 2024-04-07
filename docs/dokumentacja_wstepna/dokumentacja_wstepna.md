@@ -1,12 +1,4 @@
-# Zaawansowane uczenie maszynowe
-
-## Projekt
-
-Semestr 24L
-
-Piotr Hondra, Jan Jeschke
-
-### Temat
+## Temat
 
 Zintegrowane uwzględnianie kosztów pomyłek przy tworzeniu modeli klasyfikacji przez próbkowanie przykładów klas o niskich kosztach pomyłek, replikację przykładów klas o wysokich kosztach pomyłek oraz zmianę etykiet (metoda MetaCost). Implementacja w formie opakowania umożliwiającego użycie dowolnego algorytmu klasyfikacji dostępnego w środowisku R lub Python stosującego standardowy interfejs wywołania. Funkcje do tworzenia modelu i predykcji. Badanie wpływu uwzględniania kosztów pomyłek na jakość modeli klasyfikacji tworzonych za pomocą wybranych algorytmów dostępnych w środowisku R lub Python.
 
@@ -47,11 +39,11 @@ Ponieważ trudno jest ocenić podobieństwo przykładów treningowych oraz probl
 - MetaCost powinien w minimalnym stopniu wpływać na wyniki dla zbiorów zbilansowanych
 - MetaCost powinien działać z dowolną metodą klasyfikacji
 
-### Charakterystyka zbiorów danych
+## Charakterystyka zbiorów danych
 
 Aby udowodnić postawione hipotezy, należy wybrać zbiory danych zbilansowane oraz niezbilansowane. Powinno się skorzystać z dużych zbiorów danych ze względu na użycie lasu losowego. Przygotowanie danych powinno zawierać eksplorację danych mającą na celu wykrycie niepoprawnych instancji danych. Następnie tak wykryte przypadki należy odpowiednio przekształcić bądź usunąć. Należy pamiętać, że chcemy zbadać scenariusz, w którym rozkład przykładów treningowych jest niejednostajny. Pytanie, jak powinno się testować taki scenariusz. Rozważamy dwie opcje — sztuczne zbilansowanie zbioru danych lub skorzystanie z metryk, które uwzględniają niezbilansowanie.
 
-### Parametry algorytmów, których wpływ na wyniki będzie badany
+## Parametry algorytmów, których wpływ na wyniki będzie badany
 
 Algorytm MetaCost ma szereg parametrów, których wpływ na jakość końcowego modelu można sprawdzić. Dla ustalonego wewnętrznego algorytmu, zbioru trenującego, macierzy kosztów pomyłek, do określenia pozostają:
 
@@ -61,7 +53,7 @@ Algorytm MetaCost ma szereg parametrów, których wpływ na jakość końcowego 
 
 Wpływ tych trzech parametrów będzie zbadany, alby lepiej zrozumieć działanie algorytmu zewnętrznego.
 
-### Miary jakości i procedury oceny modeli
+## Miary jakości i procedury oceny modeli
 
 Tak jak wcześniej wspomniano jedną z technik oceny, będzie wykorzystanie metryk, które uwzględniają niezbilansowanie zbiorów. W tym celu uśrednianie metryk będzie się odbywać, uwzględniając ilość instancji. Metryki, które będą stosowane:
 
