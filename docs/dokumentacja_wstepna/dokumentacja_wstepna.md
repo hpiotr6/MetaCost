@@ -4,8 +4,7 @@
 
 Semestr 24L
 
-Piotr Hondra</br>
-Jan Jeschke
+Piotr Hondra, Jan Jeschke
 
 ### Temat
 
@@ -13,14 +12,14 @@ Zintegrowane uwzględnianie kosztów pomyłek przy tworzeniu modeli klasyfikacji
 
 ## Wprowadzenie
 
-Większość algorytmów uczących modele służące do klasyfikacji zakłada, że wszystkie możliwe rodzaje pomyłem mają taki sam koszt. W rzeczywistych zastosowaniach często nie jest to prawdą, pomyłka jednego rodzaju jest o wiele bardziej szkodliwa niż innego rodzaju. Modyfikowanie istniejących już algorytmów, tak aby uwzględniały te kwestie wymaga osobnego podejścia do każdego z nich i może nie być trywialne.
+Większość algorytmów uczących modele klasyfikujące zakłada, że wszystkie możliwe rodzaje pomyłek mają taki sam koszt. W rzeczywistych zastosowaniach często nie jest to prawdą, pomyłka jednego rodzaju jest o wiele bardziej szkodliwa niż innego rodzaju. Modyfikowanie istniejących już algorytmów, tak aby uwzględniały te kwestie wymaga osobnego podejścia do każdego z nich, więc zajęłoby dużo czasu i może nie być trywialne.
 
-W artykule *MetaCost: A General Method for Making Classifiers Cost-Sensitive* Pedro Domingos proponuje meta algorytm, który sprawia, że dowolny model klasyfikujący jest w stanie uwzględniać różne koszty poszczególnych pomyłek. Jest to możliwe poprzez potraktowanie modelu jako czarnej skrzynki. Modyfikując zbiór treningowy jest możliwe otrzymanie różnych modeli i ocenianie ich na podstawie rezultatów.
+W artykule *MetaCost: A General Method for Making Classifiers Cost-Sensitive* Pedro Domingos proponuje meta algorytm, który sprawia, że dowolny model klasyfikujący jest w stanie uwzględniać różne koszty poszczególnych pomyłek. Jest to możliwe poprzez potraktowanie modelu jako czarnej skrzynki. Poprzez modyfikacje zbioru treningowego i obserwacje zmian w predykcjach modelu, można odpowiednio nauczyć model, tak aby kosztu pomyłek były uwzględnione.
 
 ## Implementacja
 
 Do realizacji projektu, z dwóch możliwości, wybrany został język Python. Wybrane algorytmy będą pochodziły z modułu scikit-learn (sklearn).
-Standardowym sposobem wywołania uczenia modelu w tym module jest funkcja *fit(X, Y)*, a do predykcji *predict(Y)*. To pozwala na zaimplementowanie algorytmu MetaCost zgodnie z jego przeznaczeniem, tj. traktując jak czarną skrzynkę. Przekazując do algorytmu obiekt klasy jednego z klasyfikatorów, można wywołać te funkcje bez wiedzy jaki algorytm jest używany pod spodem.
+Standardowym sposobem wywołania uczenia modelu w tym module jest funkcja *fit(X, Y)*, a do predykcji *predict(Y)*. To pozwala na zaimplementowanie algorytmu MetaCost zgodnie z jego przeznaczeniem, tj. traktując algorytm wewnętrzny jak czarną skrzynkę. Przekazując do algorytmu obiekt klasy jednego z klasyfikatorów, można wywołać te funkcje bez wiedzy jaki algorytm jest używany pod spodem.
 
 ## Lista algorytmów
 
@@ -52,7 +51,15 @@ Ponieważ trudno jest ocenić podobieństwo przykładów treningowych oraz probl
 
 Aby udowodnić postawione hipotezy, należy wybrać zbiory danych zbilansowane oraz niezbilansowane. Powinno się skorzystać z dużych zbiorów danych ze względu na użycie lasu losowego. Przygotowanie danych powinno zawierać eksplorację danych mającą na celu wykrycie niepoprawnych instancji danych. Następnie tak wykryte przypadki należy odpowiednio przekształcić bądź usunąć. Należy pamiętać, że chcemy zbadać scenariusz, w którym rozkład przykładów treningowych jest niejednostajny. Pytanie, jak powinno się testować taki scenariusz. Rozważamy dwie opcje — sztuczne zbilansowanie zbioru danych lub skorzystanie z metryk, które uwzględniają niezbilansowanie.
 
-### parametry algorytmów, których wpływ na wyniki będzie badany
+### Parametry algorytmów, których wpływ na wyniki będzie badany
+
+Algorytm MetaCost ma szereg parametrów, których wpływ na jakość końcowego modelu można sprawdzić. Dla ustalonego wewnętrznego algorytmu, zbioru trenującego, macierzy kosztów pomyłek, do określenia pozostają:
+
+- liczba prób, które zostaną wygenerowane,
+- liczba próbek w każdej próbie,
+- czy do ewaluacji modeli używane będą próbki wszystkie, czy tylko te nie występujące w jego próbie.
+
+Wpływ tych trzech parametrów będzie zbadany, alby lepiej zrozumieć działanie algorytmu zewnętrznego.
 
 ### Miary jakości i procedury oceny modeli
 
