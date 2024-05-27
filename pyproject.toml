@@ -6,6 +6,9 @@ authors = ["Piotr Hondra <piotr.hondra@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "3.10.*"
+numpy = "^1.26.4"
+scikit-learn = "^1.5.0"
+ipykernel = "^6.29.4"
 
 [tool.poetry.dev-dependencies]
 
