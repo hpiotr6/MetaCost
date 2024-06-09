@@ -1,5 +1,4 @@
 import numpy as np
-from sklearn.neural_network import MLPClassifier
 from sklearn.base import clone
 
 
@@ -47,9 +46,9 @@ class MetaCost:
                     [model.predict_proba(x.reshape(1, -1)) for model in models]
                 )
             else:
-                preds = np.array([model.predict(x) for model in models])
+                preds = np.array([model.predict(x.reshape(1, -1)) for model in models])
                 p_jx_ms = np.zeros((len(models), self.num_classes))
-                p_jx_ms[np.arange(len(models)), preds] = 1
+                p_jx_ms[np.arange(len(models)), preds.ravel()] = 1
 
             p_jx = p_jx_ms.mean(0)
             label = np.argmin(np.dot(p_jx, self.cost_matrix))
